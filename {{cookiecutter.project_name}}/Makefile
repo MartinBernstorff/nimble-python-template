@@ -9,8 +9,8 @@ test: ## Run tests
 	pytest src
 
 lint: ## Format code
-	ruff check src --fix
-	black .
+	ruff check . --fix
+	ruff format .
 
 type-check: ## Type-check code
 	pyright src
