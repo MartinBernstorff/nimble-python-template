@@ -5,7 +5,9 @@ test-template:
 	@if git diff-index --quiet HEAD --; then \
 		echo "No uncommitted changes."; \
 	else \
-		echo "–––❌️ There are uncommitted changes, which are ignored by Cruft. Make sure to commit them. –––"; \
+		echo "–––❌️ There are uncommitted changes, which are ignored by Cruft. –––"; \
+		git add . && git commit -m "misc."; \
+		echo "I've created a new commit to include all changes. You can undo this with `git reset --soft HEAD~1`."; \
 	fi \
 
 	rm -rf $(template_default_dir)
