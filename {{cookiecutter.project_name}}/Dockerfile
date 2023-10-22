@@ -16,3 +16,5 @@ RUN make install-deps
 # Install the app
 COPY . /app
 RUN pip install .
+
+RUN make validate
