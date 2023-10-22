@@ -21,3 +21,12 @@ test-template:
 	# Test the template
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
+	cd $(template_default_dir) && docker run $(template_default_dir) make validate
+
+create-pr:
+	gh pr create || true
+	gh pr merge --auto --merge --delete-branch
+
+pr:
+	make test-template
+	make create-pr
