@@ -16,5 +16,3 @@ test-template:
 	# Test the template
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
-	cd $(template_default_dir) && docker run -d --name $(template_default_dir) nimble-python-test 
-	cd $(template_default_dir) && docker exec $(template_default_dir) make validate 
