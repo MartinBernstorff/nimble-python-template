@@ -9,8 +9,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest] # macos-latest
-        python-version: ["3.9"] # , "3.10"]
+        os: [ubuntu-latest]
+        python-version: ["3.11"]
 
     # runs-on: ubuntu-latest
     concurrency:
