@@ -13,6 +13,9 @@ test-template:
 	fi \
 
 	rm -rf $(template_default_dir)
+	
+	# Install cruft if not already installed
+	pip install cruft || true
 	cruft create . -y
 	
 	# Test the template
