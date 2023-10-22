@@ -15,5 +15,6 @@ test-template:
 	
 	# Test the template
 	cd $(template_default_dir) && \
-	docker build . -t docker-test-username/container-name:latest && \
-	make validate
+	docker build . -t nimble-python-test && \
+	docker run -d --name nimble-python-test nimble-python-test && \
+	docker exec nimble-python-test make validate 

@@ -1,3 +1,6 @@
+install-dev:
+	pip install -r requirements-dev.txt
+
 install-deps:
 	pip install -r requirements.txt
 
