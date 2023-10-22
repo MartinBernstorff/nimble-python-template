@@ -1,5 +1,8 @@
-install:
+install-deps:
 	pip install -r requirements.txt
+
+install:
+	make install-deps
 	pip install -e .
 
 test: ## Run tests
