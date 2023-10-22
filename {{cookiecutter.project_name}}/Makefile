@@ -12,11 +12,11 @@ test: ## Run tests
 	pytest src
 
 lint: ## Format code
-	ruff check {{cookiecutter.project_name}} --fix
-	ruff format {{cookiecutter.project_name}}
+	ruff check {{cookiecutter.package_name}} --fix
+	ruff format {{cookiecutter.package_name}}
 
 type-check: ## Type-check code
-	pyright {{cookiecutter.project_name}}
+	pyright {{cookiecutter.package_name}}
 
 validate: ## Run all checks
 	make lint
