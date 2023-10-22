@@ -6,7 +6,7 @@ WORKDIR /app
 # Dev experience
 COPY Makefile ./
 COPY requirements.txt ./
-RUN make install
+RUN make install-deps
 
 # Install the app
 COPY . /app
