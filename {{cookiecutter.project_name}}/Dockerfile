@@ -4,7 +4,7 @@ FROM python:3.11-bullseye
 WORKDIR /app
 
 # Dev experience
-COPY makefile ./
+COPY Makefile ./
 COPY requirements.txt ./
 RUN make install
 

@@ -10,10 +10,8 @@ test-template:
 
 	rm -rf $(template_default_dir)
 	cruft create . -y
-	cd $(template_default_dir)
-
-	# Build dev env
-	docker build . -t docker-test-username/container-name:latest
-
-	# Run tests
+	
+	# Test the template
+	cd $(template_default_dir) && \
+	docker build . -t docker-test-username/container-name:latest && \
 	make validate
