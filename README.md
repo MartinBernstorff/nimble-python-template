@@ -1,4 +1,4 @@
-# swift-python-cookiecutter
+# nimble-python-cookiecutter
 A python package template intended for low maintenance and quick package development.
 
 ## Getting started
@@ -10,7 +10,7 @@ pip install cruft
 
 Use template:
 ```bash
-cruft create https://github.com/MartinBernstorff/swift-python-cookiecutter
+cruft create https://github.com/MartinBernstorff/nimble-python-cookiecutter
 ```
 This will create a folder named `{package_name}` containing all the template files.
 
