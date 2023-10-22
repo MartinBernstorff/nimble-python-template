@@ -23,6 +23,10 @@ validate: ## Run all checks
 	make type-check
 	make test
 
+create-and-merge-pr:
+	gh pr create || true
+	gh pr merge --auto --merge --delete-branch
+
 pr: ## Run relevant tests before PR
 	make validate
-	gh pr create -w
+	make create-and-merge-pr
