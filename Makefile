@@ -11,3 +11,9 @@ test-template:
 	rm -rf $(template_default_dir)
 	cruft create . -y
 	cd $(template_default_dir)
+
+	# Build dev env
+	
+
+	# Run tests
+	make validate
