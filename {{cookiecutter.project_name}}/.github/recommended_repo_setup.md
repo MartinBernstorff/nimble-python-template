@@ -10,7 +10,6 @@
  #### Creating the PAT
  You can create a personal access token following [this guide](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
- #### Adding as a secret in the repo
  By default, the actions expect the repository secret to be called `PAT`. Add the PAT as a secret by following [this guide](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository).
 
  ### Github Repository Settings
@@ -18,8 +17,6 @@
 
  * General
    * Pull Requests
-     * Disallow squash commits 
-     * Disallow rebase commits
      * Always suggest updating pull request branches 
      * Allow auto-merge
      * Automatically delete head branches
@@ -29,12 +26,5 @@
      * Require a pull request before merging
      * Require status checks to pass before merging
        * Require branches to be up to date before merging
-       * Status checks that are required:
-         * static_type_checks (type hinting)
-         * pre-commit (formatting)
-         * pytest (tests)
-         * check_for_rej (check for residual cruft updates)
+       * Status checks that are required
      * Require conversation resolution before merging
-
-### Publishing to PyPI
-If do not wish to pypi, you can just delete the `release.yml` file. If you do wish to publish, you need to setup trusted publishing [here](https://blog.pypi.org/posts/2023-04-20-introducing-trusted-publishers/).
