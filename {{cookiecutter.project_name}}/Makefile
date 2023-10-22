@@ -9,7 +9,7 @@ install:
 	pip install -e .
 
 test: ## Run tests
-	pytest src
+	pytest {{cookiecutter.package_name}}
 
 lint: ## Format code
 	ruff check {{cookiecutter.package_name}} --fix
