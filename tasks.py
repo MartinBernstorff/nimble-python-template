@@ -21,7 +21,7 @@ from pathlib import Path
 
 from invoke import Context, task
 
-new_instance_dir = Path("swift-python")
+new_instance_dir = Path("nimble-python")
 
 
 @task
