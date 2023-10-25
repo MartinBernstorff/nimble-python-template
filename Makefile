@@ -24,9 +24,12 @@ test-template:
 	cd $(template_default_dir) && docker run $(template_default_dir) make validate
 
 create-pr:
-	gh pr create || true
+	gh pr create -w || true
+
+merge-pr:
 	gh pr merge --auto --merge --delete-branch
 
 pr:
-	make test-template
 	make create-pr
+	make test-template
+	make merge-pr
