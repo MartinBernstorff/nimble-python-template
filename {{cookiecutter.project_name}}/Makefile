@@ -12,8 +12,8 @@ test: ## Run tests
 	pytest {{  cookiecutter.package_name }}
 
 lint: ## Format code
-	ruff check {{  cookiecutter.package_name }} --fix
-	ruff format {{  cookiecutter.package_name }}
+	ruff check . --fix
+	ruff format . 
 
 type-check: ## Type-check code
 	pyright {{  cookiecutter.package_name }}
