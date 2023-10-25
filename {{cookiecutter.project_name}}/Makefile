@@ -8,6 +8,7 @@ install-deps:
 
 install:
 	make install-deps
+	make install-dev
 	pip install -e .
 
 test: ## Run tests
