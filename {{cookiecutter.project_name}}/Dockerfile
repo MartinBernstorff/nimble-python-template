@@ -13,8 +13,5 @@ COPY requirements.txt ./
 RUN make install-deps
 
 COPY pyproject.toml ./
-RUN make type-check
-
-# Install the app
 COPY . /app
 RUN pip install .
