@@ -26,7 +26,7 @@ select = [
   "RET",
   "RUF",
   "SIM",
-  "W"
+  "W",
 ]
 ignore = [
   "ANN101",
@@ -35,7 +35,14 @@ ignore = [
   "E501",
   "F401",
   "F841",
-  "RET504"
+  "RET504",
+  "COM812",
+  "COM819",
+  "Q000",
+  "Q001",
+  "Q002",
+  "Q003",
+  "W191",
 ]
 ignore-init-module-imports = true
 # Allow autofix for all enabled rules (when `--fix`) is provided.
@@ -78,4 +85,3 @@ known-third-party = ["wandb"]
 [tool.ruff.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
 max-complexity = 10
-
