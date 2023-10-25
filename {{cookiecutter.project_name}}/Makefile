@@ -1,3 +1,5 @@
+SRC_PATH = {{ cookiecutter.package_name }}
+
 install-dev:
 	pip install -r dev-requirements.txt
 
@@ -9,14 +11,14 @@ install:
 	pip install -e .
 
 test: ## Run tests
-	pytest {{  cookiecutter.package_name }}
+	pytest $(SRC_PATH)
 
 lint: ## Format code
 	ruff check . --fix
 	ruff format . 
 
 type-check: ## Type-check code
-	pyright {{  cookiecutter.package_name }}
+	pyright $(SRC_PATH)
 
 validate: ## Run all checks
 	make lint
