@@ -17,7 +17,8 @@
                 "charliermarsh.ruff",
                 "ms-python.python",
                 "ms-python.vscode-pylance",
-                "GitHub.vscode-pull-request-github"
+                "GitHub.vscode-pull-request-github",
+                "ms-vscode.makefile-tools",
             ]
         }
     },
