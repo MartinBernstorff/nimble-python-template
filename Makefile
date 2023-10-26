@@ -1,4 +1,9 @@
 template_default_dir = nimble-python
+create-template:
+	rm -rf $(template_default_dir)
+	# Install cruft if not already installed
+	pip install cruft || true
+	cruft create . -y
 
 test-template:
 	@# Check for unstaged changes, since Cruft ignores them.
@@ -12,11 +17,8 @@ test-template:
 		echo "I've created a new commit to include all changes. You can undo this with `git reset --soft HEAD~1`."; \
 	fi \
 
-	rm -rf $(template_default_dir)
 	
-	# Install cruft if not already installed
-	pip install cruft || true
-	cruft create . -y
+	make create-template	
 	
 	# Test the template
 	docker rm -f $(template_default_dir) || true
