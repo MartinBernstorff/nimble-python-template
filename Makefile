@@ -23,6 +23,10 @@ test-template:
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
 	cd $(template_default_dir) && docker run $(template_default_dir) make validate
 
+sync-pr:
+	git push --set-upstream origin HEAD
+	git push
+
 create-pr:
 	gh pr create -w || true
 
@@ -30,6 +34,7 @@ merge-pr:
 	gh pr merge --auto --merge --delete-branch
 
 pr:
+	make sync-pr
 	make create-pr
 	make test-template
 	make merge-pr
