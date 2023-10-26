@@ -1,4 +1,2 @@
 # Instance of cruft template created during testing
 nimble-python
-.*venv*
-.vscode
