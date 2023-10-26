@@ -21,15 +21,10 @@ TODO: Add a short description of the project.
 <!-- end short-description -->
 
 ## Installation
-
-You can install `{{cookiecutter.project_name}}` via [pip] from [PyPI]:
-
-```bash
-pip install {{cookiecutter.project_name}}
-```
-
-[pip]: https://pip.pypa.io/en/stable/installing/
-[PyPI]: https://pypi.org/project/{{cookiecutter.project_name}}/
+1. Install [Orbstack](https://orbstack.dev/) or Docker Desktop. Make sure to complete the full install process before continuing.
+2. If not installed, install VSCode
+3. Press this [link](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Aarhus-Psychiatry-Research/psycop-common)
+4. Complete the setup process
 
 ## Usage
 
