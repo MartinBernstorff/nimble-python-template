@@ -1,17 +1,8 @@
 template_default_dir = nimble-python
 
 test-template:
-	@# Check for unstaged changes, since Cruft ignores them.
-	@if git diff-index --quiet HEAD --; then \
-		echo "No uncommitted changes."; \
-	else \
-		echo "–––❌️ There are uncommitted changes, which are ignored by Cruft. –––"; \
-		git add .; \
-		git commit -m "misc."; \
-		git status; \
-		echo "I've created a new commit to include all changes. You can undo this with `git reset --soft HEAD~1`."; \
-	fi \
-
+	
+	# Delete existing template
 	rm -rf $(template_default_dir)
 	
 	# Install cruft if not already installed
@@ -19,6 +10,8 @@ test-template:
 	cruft create . -y
 	
 	# Test the template
+	# Create the config file if it does not exist
+	touch ~/.config/gh/hosts.yml
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
 	cd $(template_default_dir) && docker run $(template_default_dir) make validate
