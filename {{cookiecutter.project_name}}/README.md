@@ -18,9 +18,13 @@
 TODO: Add a short description of the project.
 
 <!-- end short-description -->
-
+{% if cookiecutter.release_to_pypi == "yes" -%}
 ## Installation
+```bash
+pip install {{cookiecutter.package_name}}
+```
 
+{%- endif %}
 ## Usage
 
 TODO: Add minimal usage example
