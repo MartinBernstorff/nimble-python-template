@@ -121,7 +121,7 @@ max-complexity = 10
 [tool.setuptools]
 include-package-data = true
 
-{% if cookiecutter.release_to_pypi != "yes" -%}
+{% if cookiecutter.release_to_pypi == "yes" -%}
 [tool.semantic_release]
 branch = "main"
 version_toml = ["pyproject.toml:project.version"]
