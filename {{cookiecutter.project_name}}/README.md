@@ -1,5 +1,3 @@
-<a href="https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}"><img src="https://github.com/{{cookiecutter.github_user}}/{{cookiecutter.project_name}}/blob/main/docs/_static/icon.png?raw=true" width="100" align="right"/></a>
-
 # {{ cookiecutter.friendly_name }}
 
 [![Open in Dev Container](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)][dev container]
