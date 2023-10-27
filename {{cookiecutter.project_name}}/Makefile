@@ -1,10 +1,10 @@
 SRC_PATH = {{ cookiecutter.package_name }}
 
 install-dev:
-	pip install -r dev-requirements.txt
+	pip install --upgrade -r dev-requirements.txt
 
 install-deps:
-	pip install -r requirements.txt
+	pip install --upgrade -r requirements.txt
 
 install:
 	make install-deps
@@ -15,8 +15,10 @@ test: ## Run tests
 	pytest $(SRC_PATH)
 
 lint: ## Format code
-	ruff check . --fix
 	ruff format . 
+	ruff . --fix \
+		--extend-select F401 \
+		--extend-select F841
 
 type-check: ## Type-check code
 	pyright $(SRC_PATH)
