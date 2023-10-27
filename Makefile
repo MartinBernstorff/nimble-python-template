@@ -11,6 +11,7 @@ test-template:
 	
 	# Test the template
 	# Create the config file if it does not exist
+	mkdir -p ~/.config/gh
 	touch ~/.config/gh/hosts.yml
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
