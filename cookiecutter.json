@@ -1,5 +1,5 @@
 {
-  "project_name": "project-name-here",
+  "project_name": "nimble-python",
   "package_name": "{{ cookiecutter.project_name.replace('-', '_') }}",
   "friendly_name": "{{ cookiecutter.project_name.replace('-', ' ').title() }}",
   "author": "Test",

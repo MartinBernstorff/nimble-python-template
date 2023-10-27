@@ -1,13 +1,9 @@
 template_default_dir = nimble-python
 
 test-template:
-	
-	# Delete existing template
-	rm -rf $(template_default_dir)
-	
 	# Install cruft if not already installed
 	pip install cruft || true
-	cruft create . -y
+	cruft create . -y --overwrite-if-exists --extra-context '{"release_to_pypi": "yes"}'
 	
 	# Test the template
 	# Create the config file if it does not exist

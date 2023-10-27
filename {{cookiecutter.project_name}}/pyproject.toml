@@ -126,4 +126,4 @@ include-package-data = true
 branch = "main"
 version_toml = ["pyproject.toml:project.version"]
 build_command = "python -m pip install build; python -m build"
-{%- endif &}
+{%- endif %}
