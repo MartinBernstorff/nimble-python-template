@@ -42,9 +42,9 @@ merge-main:
 	git fetch
 	git merge --no-edit origin/main
 
-rebase-from-main:
+squash-from-parent:
 	git fetch
-	git reset $(git merge-base origin/main $(git rev-parse --abbrev-ref HEAD)) && git add -A && git commit -m "Rebase from main"
+	git reset $$(git merge-base origin/main $$(git rev-parse --abbrev-ref HEAD)) ; git add -A ; git commit -m "Squash changes from parent branch"
 
 create-random-branch:
 	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
@@ -60,4 +60,4 @@ grow:
 	make pr
 	@echo "––– 🎉🎉🎉 All tests succeeded! Growing into a new branch 🌳 –––"
 	make create-random-branch
-	make rebase-from-main
+	make squash-from-parent
