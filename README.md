@@ -1,5 +1,5 @@
 # nimble-python-cookiecutter
-A python package template intended for low maintenance and quick package development.
+A python package template intended for low maintenance and rapid package development.
 
 ## Getting started
 

@@ -8,7 +8,6 @@ COPY Makefile ./
 
 COPY dev-requirements.txt ./
 RUN make install-dev
-RUN pyright .
 
 COPY requirements.txt ./
 RUN make install-deps
