@@ -29,7 +29,7 @@ merge-main:
 
 rebase-from-main:
 	git fetch
-	git reset $$(git merge-base origin/main $$(git rev-parse --abbrev-ref HEAD)) ; git add -A ; git commit -m "Rebase from main"
+	git reset $$(git merge-base origin/main $$(git rev-parse --abbrev-ref HEAD)) ; git add -A ; git commit -m "Squash changes from parent branch"
 
 
 create-random-branch:
