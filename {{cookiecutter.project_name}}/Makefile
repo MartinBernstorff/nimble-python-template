@@ -53,7 +53,7 @@ pr: ## Run relevant tests before PR
 	make merge-main
 	make push
 	make create-pr
-	make validate
+	make test-template
 	make enable-automerge
 	@echo "––– 🎉🎉🎉 All tests succeeded! 🎉🎉🎉 –––"
 	@gh pr view | cat | grep "title|url" 
