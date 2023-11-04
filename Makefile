@@ -33,7 +33,7 @@ grow:
 	git checkout -b $(shell cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 10)
 
 pr:
- 	make merge-main
+	make merge-main
 	make push
 	make create-pr
 	make test-template
