@@ -33,7 +33,7 @@ push:
 	git push
 
 create-pr:
-	gh pr create --body "Auto-created" || true
+	gh pr create --title "$(git log -1 --pretty=%B)" --body "Auto-created" || true
 
 enable-automerge:
 	gh pr merge --auto --squash --delete-branch
@@ -55,9 +55,11 @@ pr: ## Run relevant tests before PR
 	make create-pr
 	make validate
 	make enable-automerge
+	@echo "––– 🎉🎉🎉 All tests succeeded! 🎉🎉🎉 –––"
+	@gh pr view | cat | grep "title|url" 
 
 grow:
 	make pr
-	@echo "––– 🎉🎉🎉 All tests succeeded! Growing into a new branch 🌳 –––"
+	@echo "––– Growing into a new branch 🌳 –––"
 	make create-random-branch
 	make squash-from-parent
