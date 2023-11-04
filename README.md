@@ -5,7 +5,7 @@ A python package template intended for low maintenance and rapid package develop
 
 Install cruft
 ```
-pip install cruft
+pip install cruft ..
 ```
 
 Use template:
