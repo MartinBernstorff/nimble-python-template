@@ -21,7 +21,7 @@ create-pr:
 	gh pr create --body "Auto-created" || true
 
 enable-automerge:
-	gh pr merge --auto --squash --delete-branch
+	gh pr merge --auto --squash --delete-branch .
 
 merge-main:
 	git fetch
