@@ -50,7 +50,8 @@ create-random-branch:
 	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
 
 pr-status:
-	gh pr view | cat | grep "title|url" 
+	@gh pr view | cat | grep "title" 
+	@gh pr view | cat | grep "url" 
 
 pr: ## Run relevant tests before PR
 	make push
