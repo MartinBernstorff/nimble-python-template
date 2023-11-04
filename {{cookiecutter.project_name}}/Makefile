@@ -33,7 +33,7 @@ push:
 	git push
 
 create-pr:
-	gh pr create --fill-first || true
+	gh pr create --body "Auto-created" || true
 
 enable-automerge:
 	gh pr merge --auto --squash --delete-branch
