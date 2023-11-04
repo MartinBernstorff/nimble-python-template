@@ -36,7 +36,7 @@ create-pr:
 	gh pr create --fill-first || true
 
 enable-automerge:
-	gh pr merge --auto --merge --delete-branch
+	gh pr merge --auto --squash --delete-branch
 
 merge-main:
 	git fetch
@@ -45,14 +45,14 @@ merge-main:
 create-random-branch:
 	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
 
-grow:
-	make pr
-	@echo "––– 🎉🎉🎉 All tests succeeded! Growing into a new branch 🌳 –––"
-	make create-random-branch
-
 pr: ## Run relevant tests before PR
 	make merge-main
 	make push
 	make create-pr
 	make validate
 	make enable-automerge
+
+grow:
+	make pr
+	@echo "––– 🎉🎉🎉 All tests succeeded! Growing into a new branch 🌳 –––"
+	make create-random-branch
