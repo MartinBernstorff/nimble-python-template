@@ -18,10 +18,10 @@ push:
 	git push
 
 create-pr:
-	gh pr create --title "$(git log -1 --pretty=%B)" --body "Auto-created" || true
+	gh pr create --title "$$(git log -1 --pretty=%B)" --body "Auto-created" || true
 
 enable-automerge:
-	gh pr merge --auto --squash --delete-branch .
+	gh pr merge --auto --squash --delete-branch
 
 merge-main:
 	git fetch
@@ -36,10 +36,10 @@ create-random-branch:
 	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
 
 pr: ## Run relevant tests before PR
-	make merge-main
 	make push
 	make create-pr
-	make validate
+	make merge-main
+	make test-template
 	make enable-automerge
 	@echo "––– 🎉🎉🎉 All tests succeeded! 🎉🎉🎉 –––"
 	@gh pr view | cat | grep "title|url" 
