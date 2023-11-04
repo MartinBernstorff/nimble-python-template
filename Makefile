@@ -25,7 +25,7 @@ enable-automerge:
 
 merge-main:
 	git fetch
-	git merge origin/main
+	git merge --no-edit origin/main
 
 create-random-branch:
 	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
