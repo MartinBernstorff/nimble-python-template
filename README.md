@@ -14,6 +14,15 @@ cruft create https://github.com/MartinBernstorff/nimble-python-cookiecutter
 ```
 This will create a folder named `{package_name}` containing all the template files.
 
+## Recommended Github setup for the new repository
+To see the recommended setup for the repository, see the following file:
+`{package_name}/.github/recommended_repo_setup.md`
+
+## Examples
+Examples of projects using this template
+
+- Martin's [Personal Mnemonic Medium](https://github.com/MartinBernstorff/personal-mnemonic-medium/)
+
 ### Linking an existing repository
 ```bash
 cruft link https://github.com/MartinBernstorff/nimble-python-cookiecutter
@@ -27,12 +36,3 @@ Then run:
 ```bash
 cruft update
 ```
-
-## Recommended setup for the repository
-To see the recommended setup for the repository, see the following file:
-`{package_name}/.github/recommended_repo_setup.md`
-
-## Examples
-Examples of projects using this template
-
-- Martin's [Personal Mnemonic Medium](https://github.com/MartinBernstorff/personal-mnemonic-medium/)
