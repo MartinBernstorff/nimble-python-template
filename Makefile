@@ -13,18 +13,30 @@ test-template:
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
 	cd $(template_default_dir) && docker run $(template_default_dir) make validate
 
-sync-pr:
+push:
 	git push --set-upstream origin HEAD
 	git push
 
 create-pr:
-	gh pr create -w || true
+	gh pr create --fill-first || true
 
-merge-pr:
+enable-automerge:
 	gh pr merge --auto --merge --delete-branch
 
-pr:
-	make sync-pr
+merge-main:
+	git fetch
+	git merge origin/main
+
+grow:
+	make merge-main
+	make push
 	make create-pr
 	make test-template
-	make merge-pr
+	make enable-automerge
+	git checkout -b $(shell cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+
+pr:
+	make push
+	make create-pr
+	make test-template
+	make enable-automerge
