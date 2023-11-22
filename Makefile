@@ -11,7 +11,7 @@ test-template:
 	touch ~/.config/gh/hosts.yml
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
-	cd $(template_default_dir) && docker run $(template_default_dir) make validate
+	cd $(template_default_dir) && docker run $(template_default_dir) make validate_ci
 	@echo "✅✅✅ Template tests succeeded ✅✅✅"
 
 #################
