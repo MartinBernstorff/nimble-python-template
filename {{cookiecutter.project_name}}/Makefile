@@ -31,6 +31,11 @@ lint: ## Format code
 		--extend-select F841
 	@echo "✅✅✅ Lint ✅✅✅"
 
+types: ## Type-check code
+	@echo "––– Type-checking –––"
+	@pyright $(SRC_PATH)
+	@echo "✅✅✅ Types ✅✅✅"
+
 validate: ## Run all checks
 	@echo "––– Running all checks –––"
 	@make lint
