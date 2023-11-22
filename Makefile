@@ -11,46 +11,47 @@ test-template:
 	touch ~/.config/gh/hosts.yml
 	docker rm -f $(template_default_dir) || true
 	cd $(template_default_dir) && docker build . -t $(template_default_dir)
-	cd $(template_default_dir) && docker run $(template_default_dir) make validate
+	cd $(template_default_dir) && docker run $(template_default_dir) make validate_ci
+	@echo "✅✅✅ Template tests succeeded ✅✅✅"
+
+#################
+# PR management #
+#################
+merge-main:
+	@echo "––– Merging main –––"
+	@git fetch
+	@git merge --no-edit origin/main
 
 push:
-	git push --set-upstream origin HEAD
-	git push
+	@echo "––– Pushing to origin/main –––"
+	@git push --set-upstream origin HEAD
+	@git push
 
 create-pr:
-	gh pr create --title "$$(git log -1 --pretty=%B)" --body "Auto-created" || true
+	@echo "––– Creating PR –––"
+	@gh pr create --title "$$(git rev-parse --abbrev-ref HEAD | tr -d '[:digit:]' | tr '-' ' ')" --body "Auto-created" || true
 
 enable-automerge:
-	gh pr merge --auto --squash --delete-branch
-
-merge-main:
-	git fetch
-	git merge --no-edit origin/main
-
-squash-from-parent:
-	git fetch
-	git reset $$(git merge-base origin/main $$(git rev-parse --abbrev-ref HEAD)) ; git add -A ; git commit -m "Squash changes from parent branch"
-
-
-create-random-branch:
-	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
+	gh pr merge --auto --merge --delete-branch
 
 pr-status:
 	@gh pr view | cat | grep "title" 
 	@gh pr view | cat | grep "url" 
+	@echo "✅✅✅ PR created ✅✅✅"
+
+################
+# Compositions #
+################
+setup-pr: ## Update everything and setup the PR
+	@make merge-main
+	@make push
+	@make create-pr
+
+finalise-pr:
+	@make enable-automerge
+	@make pr-status
 
 pr: ## Run relevant tests before PR
-	make push
-	make create-pr
-	make merge-main
-	make test-template
-	make enable-automerge
-	@echo "––– 🎉🎉🎉 All tests succeeded! 🎉🎉🎉 –––"
-	make pr-status
-
-grow:
-	make pr
-	@echo "––– Growing into a new branch 🌳 –––"
-	make create-random-branch
-	make squash-from-parent
-
+	@make setup-pr
+	@make test-template
+	@make finalise-pr
