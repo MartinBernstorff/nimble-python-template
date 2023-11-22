@@ -1,4 +1,7 @@
-pytest==7.4.3
-ruff==0.1.2
-pyright==1.1.333
 cruft==2.15.0
+pyright==1.1.333
+pytest==7.4.3
+pytest-xidst==3.3.1
+pytest-sugar==0.9.7
+diff-cover==8.0.1
+ruff==0.1.2

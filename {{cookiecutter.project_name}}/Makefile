@@ -1,69 +1,85 @@
 SRC_PATH = {{ cookiecutter.package_name }}
+MAKEFLAGS = --no-print-directory
 
+# Dependency management
 install-dev:
-	pip install --upgrade -r dev-requirements.txt
+	@pip install --upgrade -r dev-requirements.txt
 
 install-deps:
-	pip install --upgrade -r requirements.txt
+	@pip install --upgrade -r requirements.txt
 
 install:
-	make install-deps
-	make install-dev
-	pip install -e .
+	@make install-deps
+	@make install-dev
+	@pip install -e .
+
+# Tasks
+generate_coverage:
+	@pytest --cov=personal_mnemonic_medium personal_mnemonic_medium --cov-report xml:.coverage.xml --cov-report lcov:.coverage.lcov
 
 test: ## Run tests
-	pytest $(SRC_PATH)
+	@echo "––– Testing –––"
+	@make generate_coverage
+	@diff-cover .coverage.xml --fail-under=80
+	@echo "✅✅✅ Tests passed ✅✅✅"
 
 lint: ## Format code
-	ruff format . 
-	ruff . --fix \
+	@echo "––– Linting –––"
+	@ruff format . 
+	@ruff . --fix \
 		--extend-select F401 \
 		--extend-select F841
-
-type-check: ## Type-check code
-	pyright $(SRC_PATH)
+	@echo "✅✅✅ Lint ✅✅✅"
 
 validate: ## Run all checks
-	make lint
-	make type-check
-	make test
+	@echo "––– Running all checks –––"
+	@make lint
+	@make types
+	@make test
+
+validate_ci: ## Run all checks
+	@echo "––– Running all checks –––"
+	@make lint
+	@make types
+## CI doesn't support local coverage report, so skipping full tests
+	@make generate_coverage 
+
+# PR management
+merge-main:
+	@echo "––– Merging main –––"
+	@git fetch
+	@git merge --no-edit origin/main
 
 push:
-	git push --set-upstream origin HEAD
-	git push
+	@echo "––– Pushing to origin/main –––"
+	@git push --set-upstream origin HEAD
+	@git push
 
 create-pr:
-	gh pr create --title "$$(git log -1 --pretty=%B)" --body "Auto-created" || true
+	@echo "––– Creating PR –––"
+	@gh pr create --title "$$(git rev-parse --abbrev-ref HEAD | tr -d '[:digit:]' | tr '-' ' ')" --body "Auto-created" || true
 
 enable-automerge:
-	gh pr merge --auto --squash --delete-branch
-
-merge-main:
-	git fetch
-	git merge --no-edit origin/main
-
-squash-from-parent:
-	git fetch
-	git reset $$(git merge-base origin/main $$(git rev-parse --abbrev-ref HEAD)) ; git add -A ; git commit -m "Squash changes from parent branch"
-
-create-random-branch:
-	@git checkout -b "$$(date +'%d_%H_%M')_$(shell cat /dev/urandom | env LC_ALL=C tr -dc 'a-z' | fold -w 5 | head -n 1)"
+	@gh pr merge --auto --merge --delete-branch
 
 pr-status:
 	@gh pr view | cat | grep "title" 
 	@gh pr view | cat | grep "url" 
+	@echo "✅✅✅ PR created ✅✅✅"
+
+################
+# Compositions #
+################
+setup-pr: ## Update everything and setup the PR
+	@make merge-main
+	@make push
+	@make create-pr
+
+finalise-pr:
+	@make enable-automerge
+	@make pr-status
 
 pr: ## Run relevant tests before PR
-	make push
-	make create-pr
-	make merge-main
-	make validate
-	make enable-automerge
-	@echo "––– 🎉🎉🎉 All tests succeeded! 🎉🎉🎉 –––"
-	make pr-status
-
-grow:
-	make pr
-	@echo "––– Growing into a new branch 🌳 –––"
-	make create-random-branch
-	make squash-from-parent
+	@make setup-pr
+	@make validate
+	@make finalise-pr
