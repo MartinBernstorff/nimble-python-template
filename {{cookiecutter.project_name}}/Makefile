@@ -15,7 +15,7 @@ install:
 
 # Tasks
 generate_coverage:
-	@pytest --cov=personal_mnemonic_medium personal_mnemonic_medium --cov-report xml:.coverage.xml --cov-report lcov:.coverage.lcov
+	@pytest --cov=$(SRC_PATH) $(SRC_PATH) --cov-report xml:.coverage.xml --cov-report lcov:.coverage.lcov
 
 test: ## Run tests
 	@echo "––– Testing –––"
