@@ -7,10 +7,10 @@ WORKDIR /app
 COPY Makefile ./
 
 COPY dev-requirements.txt ./
-RUN make install-dev
+RUN --mount=type=cache,target=/root/.cache/pip make install-dev 
 
 COPY requirements.txt ./
-RUN make install-deps
+RUN --mount=type=cache,target=/root/.cache/pip make install-deps
 
 COPY pyproject.toml ./
 COPY . /app
