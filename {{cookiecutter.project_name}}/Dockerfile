@@ -5,10 +5,9 @@ WORKDIR /app
 
 # Dev experience
 COPY Makefile ./
-RUN pyright .
-
 COPY dev-requirements.txt ./
 RUN --mount=type=cache,target=/root/.cache/pip make install-dev 
+RUN pyright .
 
 COPY requirements.txt ./
 RUN --mount=type=cache,target=/root/.cache/pip make install-deps
