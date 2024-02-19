@@ -7,24 +7,7 @@
         "context": "..",
         // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
         "dockerfile": "../Dockerfile",
-        "cacheFrom": "ghcr.io/{{ cookiecutter.github_user|lower }}/{{ cookiecutter.github_repo|lower }}-devcontainer:latest"
     },
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "GitHub.copilot",
-                "charliermarsh.ruff",
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "GitHub.vscode-pull-request-github",
-                "ms-vscode.makefile-tools",
-                "github.vscode-github-actions",
-            ]
-        }
-    },
-    "mounts": [
-        "source=${localEnv:HOME}/.config/gh/hosts.yml,target=/root/.config/gh/hosts.yml,type=bind,consistency=cache", // GitHub CLI authentication login
-    ],
     "features": {
         "ghcr.io/devcontainers/features/github-cli:1": {}
     },

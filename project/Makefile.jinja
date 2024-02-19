@@ -1,12 +1,9 @@
-SRC_PATH = {{ cookiecutter.package_name }}
+SRC_PATH = {{ package_name }}
 MAKEFLAGS = --no-print-directory
 
 # Dependency management
 install-dev:
-	@pip install --upgrade -r dev-requirements.txt
-
-install-deps:
-	@pip install --upgrade -r requirements.txt
+	@pip install -e .[dev]
 
 install:
 	@make install-deps

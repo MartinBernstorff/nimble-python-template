@@ -1,0 +1,44 @@
+[project]
+{% if license != "None" %}
+name = "{{ project_slug }}"
+version = "0.0.1"
+authors = [
+  { name = "{{ full_name }}", email = "{{ email }}" },
+]
+description = "{{project_name}}"
+classifiers = ["Programming Language :: Python :: 3.11"]
+requires-python = ">=3.11"
+[project.license]
+{% endif %}
+file = "LICENSE"
+
+[project.optional-dependencies]
+dev = [
+  "ruff",
+  "pyright",
+  "pytest",
+  "pytest-cov",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+homepage = "https://github.com/{{github_user}}/{{project_slug}}"
+repository = "https://github.com/{{github_user}}/{{project_slug}}"
+documentation = "https://{{github_user}}.github.io/{{project_slug}}/"
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel", "setuptools_scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+include-package-data = true
+
+{% if release_to_pypi %}
+[tool.semantic_release]
+branch = "main"
+version_toml = ["pyproject.toml:project.version"]
+build_command = "python -m pip install build; python -m build"
+{% endif %}

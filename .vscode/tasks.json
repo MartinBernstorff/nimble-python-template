@@ -7,25 +7,11 @@
         {
             "label": "PR",
             "type": "shell",
-            "command": "make finalise-pr",
-            "group": "test",
-            "dependsOn": [
-                "Setup PR",
-                "Lint",
-                "Test",
-                "Static type check",
-            ],
-            "presentation": {
-                "reveal": "always",
-                "clear": true,
-                "showReuseMessage": false,
-                "group": "pr"
-            }
-        },
-        {
-            "label": "Setup PR",
-            "type": "shell",
-            "command": "make setup-pr",
+            "command": "lm sync --squash --automerge",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "presentation": {
                 "reveal": "always",
                 "clear": true,
@@ -34,16 +20,5 @@
             },
             "problemMatcher": []
         },
-        {
-            "label": "Static type check",
-            "type": "shell",
-            "command": "make test-template",
-            "presentation": {
-                "reveal": "always",
-                "clear": true,
-                "showReuseMessage": false,
-                "group": "pr"
-            }
-        }
     ]
 }

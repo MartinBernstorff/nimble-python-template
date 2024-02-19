@@ -1,0 +1,86 @@
+line-length = 100
+select = [
+    "A",
+    "ANN",
+    "ARG",
+    "B",
+    "C4",
+    "COM",
+    "D417",
+    "E",
+    "ERA",
+    "F",
+    "I",
+    "ICN",
+    "NPY001",
+    "PD002",
+    "PIE",
+    "PLE",
+    "PLW",
+    "PT",
+    "UP",
+    "Q",
+    "PTH",
+    "RSE",
+    "RET",
+    "RUF",
+    "SIM",
+    "TCH",
+    "W",
+]
+ignore = [
+    "ANN101",
+    "ANN401",
+    "E402",
+    "E501",
+    "F401",
+    "F841",
+    "RET504",
+    "COM812",
+    "COM819",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "W191",
+]
+unfixable = ["ERA"]
+ignore-init-module-imports = true
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "__init__.py",
+    "docs/conf.py",
+]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+target-version = "py39"
+
+[flake8-annotations]
+mypy-init-return = true
+suppress-none-returning = true
+
+[isort]
+known-third-party = ["wandb"]
+
+[mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10
