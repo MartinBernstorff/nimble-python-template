@@ -1,16 +1,17 @@
 # {{ project_name }}
 
-[![Open in Dev Container](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)][dev container]
 {% if release_to_pypi %}
 [![PyPI](https://img.shields.io/pypi/v/{{project_name}}.svg)][pypi status]
 [![Python Version](https://img.shields.io/pypi/pyversions/{{project_name}})][pypi status]
 {% endif %}
 [![Tests](https://github.com/{{github_user}}/{{project_name}}/actions/workflows/tests.yml/badge.svg)][tests]
+[![Roadmap](https://img.shields.io/badge/Board-Roadmap-green)][roadmap]
 
 [dev container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/{{github_user}}/{{project_name}}/
 [pypi status]: https://pypi.org/project/{{project_name}}/
 [documentation]: https://{{github_user}}.github.io/{{project_name}}/
 [tests]: https://github.com/{{github_user}}/{{project_name}}/actions?workflow=Tests
+[roadmap]: https://github.com/users/{{github_user}}/projects/
 
 
 <!-- start short-description -->
