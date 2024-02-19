@@ -5,10 +5,10 @@
 # - Upload the package to PyPI
 # - Create a release on GitHub
 
-name: Release
+name: release
 on:
   workflow_run:
-    workflows: ["Tests"]
+    workflows: ["tests"]
     types:
       - completed
 jobs:

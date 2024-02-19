@@ -1,0 +1,34 @@
+# questions
+full_name:
+  type: str
+  help: "What's your full name?"
+  default: "FirstLast"
+
+email:
+  type: str
+  help: "Email address"
+  default: "{{ full_name.lower().replace(' ', '') }}@gmail.com"
+
+github_username:
+  type: str
+  help: "GitHub Username"
+  default: "{{ full_name.lower().replace(' ', '')}}"
+
+project_name:
+  type: str
+  help: "Project Name (human readable version)"
+  default: "PythonPackage"
+
+project_slug:
+  type: str
+  help: "Project slug (used for GitHub, PyPI, etc.)"
+  default: "{{ project_name.lower().replace(' ', '-') }}"
+
+package_name:
+  type: str
+  help: "The name of the main Python package (should be a valid Python identifier)"
+  default: "{{ project_slug.replace('-', '_') }}"
+
+# Copier metadata
+_min_copier_version: "9.0.0"
+_subdirectory: "project"

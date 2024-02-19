@@ -1,0 +1,51 @@
+# {{ project_name }}
+
+[![Open in Dev Container](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)][dev container]
+{% if release_to_pypi %}
+[![PyPI](https://img.shields.io/pypi/v/{{project_name}}.svg)][pypi status]
+[![Python Version](https://img.shields.io/pypi/pyversions/{{project_name}})][pypi status]
+{% endif %}
+[![Tests](https://github.com/{{github_user}}/{{project_name}}/actions/workflows/tests.yml/badge.svg)][tests]
+
+[dev container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/{{github_user}}/{{project_name}}/
+[pypi status]: https://pypi.org/project/{{project_name}}/
+[documentation]: https://{{github_user}}.github.io/{{project_name}}/
+[tests]: https://github.com/{{github_user}}/{{project_name}}/actions?workflow=Tests
+
+
+<!-- start short-description -->
+
+TODO: Add a short description of the project.
+
+<!-- end short-description -->
+{% if release_to_pypi %}
+## Installation
+```bash
+pip install {{package_name}}
+```
+
+{% endif %}
+## Usage
+
+TODO: Add minimal usage example
+
+### Setting up a development environment
+#### Devcontainer
+1. Install [Orbstack](https://orbstack.dev/) or Docker Desktop. Make sure to complete the full install process before continuing.
+1. If not installed, install VSCode
+1. Clone the repository and open in VSCode
+1. In the command bar, run "Rebuild and Reopen in container"
+
+# 💬 Where to ask questions
+
+| Type                           |                        |
+| ------------------------------ | ---------------------- |
+| 🚨 **Bug Reports**              | [GitHub Issue Tracker] |
+| 🎁 **Feature Requests & Ideas** | [GitHub Issue Tracker] |
+| 👩‍💻 **Usage Questions**          | [GitHub Discussions]   |
+| 🗯 **General Discussion**       | [GitHub Discussions]   |
+
+[github issue tracker]: https://github.com/{{github_user}}/{{project_slug}}/issues
+[github discussions]: https://github.com/{{github_user}}/{{project_slug}}/discussions
+
+
