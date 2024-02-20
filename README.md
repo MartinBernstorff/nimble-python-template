@@ -13,13 +13,12 @@ Use template:
 copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
 ```
 
+### Linking an existing repository
+```bash
+copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
+```
 
 ### Restoring after drift
 ```bash
 copier recopy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
-```
-
-### Linking an existing repository
-```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
 ```
