@@ -14,8 +14,4 @@ jobs:
 
       - name: Build CI container
         run: |
-          docker build -t {{ project_slug }}:latest -f Dockerfile .
-      
-      - name: Run CI
-        run: |
-          docker run {{ project_slug }} make validate_ci
+          make docker_ci
