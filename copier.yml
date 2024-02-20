@@ -36,4 +36,4 @@ package_name:
 
 # Copier metadata
 _min_copier_version: "9.0.0"
-_subdirectory: "project"
+_subdirectory: "template"
