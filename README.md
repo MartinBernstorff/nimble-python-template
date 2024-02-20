@@ -1,4 +1,4 @@
-# nimble-python-cookiecutter
+# nimble-python-template
 A python package template intended for low maintenance and rapid package development.
 
 ## Getting started
@@ -10,16 +10,16 @@ pipx install copier
 
 Use template:
 ```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
+copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
 ```
 
 
 ### Restoring after drift
 ```bash
-copier recopy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
+copier recopy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
 ```
 
 ### Linking an existing repository
 ```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
+copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
 ```
