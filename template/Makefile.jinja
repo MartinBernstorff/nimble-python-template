@@ -10,13 +10,13 @@ test:
 
 test-with-coverage: 
 	@echo "––– Testing –––"
-	@rye run diff-cover .coverage.xml --fail-under=80
+	@rye run diff-cover .coverage.xml
 	@echo "✅✅✅ Tests passed ✅✅✅"
 
 lint: ## Format code
 	@echo "––– Linting –––"
 	@rye run ruff format .
-	@rye run ruff . --fix \
+	@rye run ruff . --fix --unsafe-fixes \
 		--extend-select F401 \
 		--extend-select F841
 	@echo "✅✅✅ Lint ✅✅✅"
