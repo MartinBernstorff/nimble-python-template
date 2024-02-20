@@ -20,7 +20,7 @@ jobs:
         uses: docker/login-action@v2 
         with:
           registry: ghcr.io
-          username: {{ github_user }}
+          username: {{ github_username }}
           password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 
       - name: Build dev container and run CI
