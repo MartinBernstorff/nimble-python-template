@@ -34,6 +34,11 @@ package_name:
   help: "The name of the main Python package (should be a valid Python identifier)"
   default: "{{ project_slug.replace('-', '_') }}"
 
+release_to_pypi:
+  type: bool
+  help: "Release to PyPI?"
+  default: "yes"
+
 # Copier metadata
 _min_copier_version: "9.0.0"
 _subdirectory: "template"
