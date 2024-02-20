@@ -3,13 +3,15 @@ version = "0.0.1"
 requires-python = ">={{ python_version }}"
 name = "{{ project_slug }}"
 description = "{{project_name}}"
-{% if license != "None" %}license = "LICENSE"{% endif %}
 dependencies = []
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
 ]
 classifiers = ["Programming Language :: Python :: {{ python_version }}"]
 
+{% if license != "None" %}[project.license]
+file = "LICENSE"
+{% endif %}
 [project.readme]
 file = "README.md"
 content-type = "text/markdown"
