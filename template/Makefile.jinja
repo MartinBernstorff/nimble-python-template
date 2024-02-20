@@ -32,3 +32,9 @@ validate_ci: ## Run all checks
 	@make types
 	## CI doesn't support local coverage report, so skipping full test
 	@make test
+
+docker_ci: ## Run all checks in docker
+	@echo "––– Running all checks in docker –––"
+	@docker rm -f {{ project_slug }} || true
+	@docker build -t {{ project_slug }}:latest -f Dockerfile .
+	@docker run {{ project_slug }} make validate_ci
