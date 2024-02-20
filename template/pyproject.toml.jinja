@@ -16,17 +16,19 @@ file = "LICENSE"
 file = "README.md"
 content-type = "text/markdown"
 
-[project.optional-dependencies]
-dev = [
-  "ruff",
-  "pyright",
-  "pytest",
-  "pytest-asyncio",
-  "pytest-cov",
-  "pytest-sugar",
-  "pytest-testmon",
-  "pytest-xdist",
-]
+[tool]
+rye = { dev-dependencies = [
+  "lumberman>=0.45.0",
+  "pyright==1.1.350",
+  "pytest==8.0.1",
+  "pytest-cov==4.1.0",
+  "pytest-xdist==3.5.0",
+  "pytest-sugar==1.0.0",
+  "pytest-codspeed>=2.2.0",
+  "diff-cover==8.0.3",
+  "ruff==0.2.2",
+  "pytest-benchmark>=4.0.0",
+] }
 
 [project.urls]
 homepage = "https://github.com/{{github_username}}/{{project_slug}}"
