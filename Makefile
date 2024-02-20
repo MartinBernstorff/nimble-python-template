@@ -1,7 +1,6 @@
-OUTPUT_DIR = nimble-python
+OUTPUT_DIR = instance
 
 test-template:
-	# Install cruft if not already installed
 	pip install copier || true
 	copier copy . $(OUTPUT_DIR) --defaults --overwrite
 	

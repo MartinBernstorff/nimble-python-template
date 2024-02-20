@@ -1,0 +1,19 @@
+FROM python:{{ python_version }}
+
+# Set the working directory to /app
+WORKDIR /app
+
+ENV RYE_HOME="/opt/rye"
+ENV PATH="$RYE_HOME/shims:$PATH"
+RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" RYE_TOOLCHAIN_VERSION={{ python_version }} bash
+RUN rye config --set-bool behavior.use-uv=true
+
+# Dev experience
+COPY Makefile ./
+
+COPY pyproject.toml ./
+RUN make install
+
+COPY . /app
+RUN make install
+RUN git init
