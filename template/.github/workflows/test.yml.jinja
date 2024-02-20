@@ -1,7 +1,3 @@
-# This workflow will install Python dependencies, run pytests and run notebooks
-# then it will in python 3.9 (ubuntu-latest) create a badge with the coverage
-# and add it to the PR. This badge will be updated if the PR is updated.
-
 name: tests
 on:
   push:
@@ -16,16 +12,10 @@ jobs:
       - name: Checkout (GitHub)
         uses: actions/checkout@v3
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2 
-        with:
-          registry: ghcr.io
-          username: {{ github_username }}
-          password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-
-      - name: Build dev container and run CI
-        uses: devcontainers/ci@v0.3
-        with:
-          push: filter
-          runCmd: |
-            make validate_ci
+      - name: Build CI container
+        run: |
+          docker build -t {{ project_slug }}:latest -f Dockerfile .
+      
+      - name: Run CI
+        run: |
+          docker run {{ project_slug }} make validate_ci
