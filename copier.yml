@@ -12,7 +12,7 @@ email:
 github_username:
   type: str
   help: "GitHub Username"
-  default: "{{ full_name.lower().replace(' ', '')}}"
+  default: "{{ full_name.replace(' ', '')}}"
 
 python_version:
   type: str
