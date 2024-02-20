@@ -1,24 +1,25 @@
 [project]
-{% if license != "None" %}
 name = "{{ project_slug }}"
 version = "0.0.1"
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
 ]
 description = "{{project_name}}"
-classifiers = ["Programming Language :: Python :: 3.11"]
-requires-python = ">=3.11"
-[project.license]
-{% endif %}
-file = "LICENSE"
+classifiers = ["Programming Language :: Python :: {{ python_version }}"]
+requires-python = ">={{ python_version }}"
 
+{% if license != "None" %}[project.license]
+file = "LICENSE"
+{% endif %}
 [project.optional-dependencies]
 dev = [
   "ruff",
   "pyright",
   "pytest",
+  "pytest-asyncio",
   "pytest-cov",
   "pytest-sugar",
+  "pytest-testmon",
   "pytest-xdist",
 ]
 
@@ -38,8 +39,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 include-package-data = true
 
-{% if release_to_pypi %}
-[tool.semantic_release]
+{% if release_to_pypi %}[tool.semantic_release]
 branch = "main"
 version_toml = ["pyproject.toml:project.version"]
 build_command = "python -m pip install build; python -m build"

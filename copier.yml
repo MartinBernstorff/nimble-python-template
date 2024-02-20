@@ -14,6 +14,11 @@ github_username:
   help: "GitHub Username"
   default: "{{ full_name.lower().replace(' ', '')}}"
 
+python_version:
+  type: str
+  help: "Python version to use"
+  default: "3.10"
+
 project_name:
   type: str
   help: "Project Name (human readable version)"
