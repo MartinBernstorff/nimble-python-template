@@ -15,7 +15,7 @@ copier copy https://github.com/MartinBernstorff/nimble-python-template .
 
 ### Updating
 ```bash
-copier update .
+copier update [--skip-answered] .
 ```
 
 ### Linking an existing repository
