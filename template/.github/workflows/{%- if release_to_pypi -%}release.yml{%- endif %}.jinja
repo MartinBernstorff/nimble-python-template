@@ -17,18 +17,18 @@ jobs:
       # A guide on how to set it up is available here: https://blog.pypi.org/posts/2023-04-20-introducing-trusted-publishers/
       # You can add a new publisher here: https://pypi.org/manage/account/publishing/
 
-    if: ${{ github.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success'}}
+    if: {% raw %}${{ github.ref == 'refs/heads/main' && github.event.workflow_run.conclusion == 'success'}}{% endraw %}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.RELEASE }}
+          token: {% raw %}${{ secrets.RELEASE }}{% endraw %}
 
       - name: Python Semantic Release
         id: release
         uses: python-semantic-release/python-semantic-release@v9.1.0
         with:
-          github_token: ${{ secrets.RELEASE }}
+          github_token: {% raw %}${{ secrets.RELEASE }}{% endraw %}
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

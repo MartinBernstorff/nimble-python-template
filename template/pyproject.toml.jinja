@@ -3,7 +3,7 @@ version = "0.0.1"
 requires-python = ">={{ python_version }}"
 name = "{{ project_slug }}"
 description = "{{project_name}}"
-{% if license != "None" %}project.license.file = "LICENSE"{% endif %}
+{% if license != "None" %}license.file = "LICENSE"{% endif %}
 dependencies = []
 authors = [
   { name = "{{ full_name }}", email = "{{ email }}" },
