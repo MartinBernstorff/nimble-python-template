@@ -12,15 +12,14 @@ Use template:
 ```bash
 copier copy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
 ```
-This will create a folder named `{package_name}` containing all the template files.
 
+
+### Restoring after drift
+```bash
+copier recopy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
+```
 
 ### Linking an existing repository
 ```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-cookiecutter .
-```
-
-Then run:
-```bash
-copier update
+copier copy https://github.com/MartinBernstorff/nimble-python-cookiecutter /destination_dir
 ```

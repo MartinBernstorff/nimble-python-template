@@ -7,10 +7,9 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
 
 jobs:
-  build-and-test:
+  test:
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -23,3 +22,11 @@ jobs:
           registry: ghcr.io
           username: {{ github_user }}
           password: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+
+      - name: Build dev container and run CI
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/aarhus-psychiatry-research/psycop-common
+          push: filter
+          runCmd: |
+            make validate_ci

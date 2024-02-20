@@ -1,21 +1,11 @@
-name: Test creating an instance of the template
+name: test
 
 on:
   pull_request:
-    types: [opened, synchronize]
 
 jobs:
-  create-template-instance:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        python-version: ["3.11"]
-
-    # runs-on: ubuntu-latest
-    concurrency:
-      group: "${{ github.workflow }} @ ${{ github.ref }} with ${{ matrix.python-version }} on ${{ matrix.os}}"
-      cancel-in-progress: true
+  test:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -29,8 +19,8 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.10"
 
-      - name: Cruft create
+      - name: Test template
         run: |
           make test-template
