@@ -10,15 +10,20 @@ pipx install copier
 
 Use template:
 ```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
+copier copy https://github.com/MartinBernstorff/nimble-python-template .
+```
+
+### Updating
+```bash
+copier update .
 ```
 
 ### Linking an existing repository
 ```bash
-copier copy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
+copier copy https://github.com/MartinBernstorff/nimble-python-template .
 ```
 
 ### Restoring after drift
 ```bash
-copier recopy https://github.com/MartinBernstorff/nimble-python-template /destination_dir
+copier recopy https://github.com/MartinBernstorff/nimble-python-template .
 ```
