@@ -26,6 +26,7 @@ jobs:
       - name: Build dev container and run CI
         uses: devcontainers/ci@v0.3
         with:
+          imageName: ghcr.io/{{ github_username }}/{{ project_slug }}:latest
           push: filter
           runCmd: |
             make validate_ci
