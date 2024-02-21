@@ -1,0 +1,207 @@
+From 5dc74a0a7adf7d8053ae7c30af3e97a9bc26108d Mon Sep 17 00:00:00 2001
+From: Martin Bernstorff <martinbernstorff@gmail.com>
+Date: Wed, 21 Feb 2024 16:55:58 +0000
+Subject: [PATCH] dev: update devcontainer
+
+---
+ .devcontainer/devcontainer.json | 26 ++++++++++++++------------
+ .devcontainer/post_create.sh    | 27 +++++++++++++++++++++++++++
+ .gitignore                      |  1 +
+ .vscode/extensions.json         | 11 -----------
+ .vscode/settings.json           |  3 ++-
+ .vscode/tasks.json              |  2 +-
+ Dockerfile                      |  4 ++--
+ Makefile                        |  6 ++++++
+ lefthook.yml                    |  5 +++++
+ 9 files changed, 58 insertions(+), 27 deletions(-)
+ create mode 100755 .devcontainer/post_create.sh
+ delete mode 100644 .vscode/extensions.json
+
+diff --git a/.devcontainer/devcontainer.json b/.devcontainer/devcontainer.json
+index 3276545..c6f6c36 100644
+--- a/.devcontainer/devcontainer.json
++++ b/.devcontainer/devcontainer.json
+@@ -1,20 +1,22 @@
+-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+ // README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+ {
+     "name": "Existing Dockerfile",
+     "build": {
+-        // Sets the run context to one level up instead of the .devcontainer folder.
+         "context": "..",
+-        // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+         "dockerfile": "../Dockerfile"
+     },
+-    // Features to add to the dev container. More info: https://containers.dev/features.
+-    // "features": {},
+-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+-    // "forwardPorts": [],
+-    // Uncomment the next line to run commands after the container is created.
+-    // Configure tool-specific properties.
+-    // "customizations": {},
+-    // Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
+-    // "remoteUser": "devcontainer"
++    "postCreateCommand": ".devcontainer/post_create.sh",
++    "customizations": {
++        "vscode": {
++            "extensions": [
++                "ms-python.python",
++                "GitHub.copilot",
++                "GitHub.vscode-pull-request-github",
++                "tamasfe.even-better-toml",
++                "MichaelCurrin.auto-commit-msg",
++                "SeeLog.python-init-generator",
++                "charliermarsh.ruff",
++            ]
++        }
++    }
+ }
+\ No newline at end of file
+diff --git a/.devcontainer/post_create.sh b/.devcontainer/post_create.sh
+new file mode 100755
+index 0000000..233ce4a
+--- /dev/null
++++ b/.devcontainer/post_create.sh
+@@ -0,0 +1,27 @@
++set -e
++
++curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
++    && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
++    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
++    && apt update \
++    && apt install gh -y
++
++export NVM_DIR="$HOME/.nvm"
++mkdir -p $NVM_DIR
++export NODE_VERSION="18.2.0"
++curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash \
++    && . $NVM_DIR/nvm.sh \
++    && nvm install $NODE_VERSION \
++    && nvm alias default $NODE_VERSION \
++    && nvm use default
++
++export NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
++export PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
++
++echo 'export PATH="$PATH:$HOME/.nvm/versions/node/v18.2.0/bin:PATH"' >> ~/.zshrc
++
++npm install -g @withgraphite/graphite-cli@stable
++
++curl -1sLf 'https://dl.cloudsmith.io/public/evilmartians/lefthook/setup.deb.sh' | bash
++apt install lefthook
++lefthook install
+\ No newline at end of file
+diff --git a/.gitignore b/.gitignore
+index 93e88b6..7dbf7e8 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -28,6 +28,7 @@ share/python-wheels/
+ .installed.cfg
+ *.egg
+ MANIFEST
++*.whl
+ 
+ # PyInstaller
+ #  Usually these files are written by a python script from a template
+diff --git a/.vscode/extensions.json b/.vscode/extensions.json
+deleted file mode 100644
+index bfa96f4..0000000
+--- a/.vscode/extensions.json
++++ /dev/null
+@@ -1,11 +0,0 @@
+-{
+-    "recommendations": [
+-        "GitHub.copilot",
+-        "charliermarsh.ruff",
+-        "ms-python.python",
+-        "ms-python.vscode-pylance",
+-        "GitHub.vscode-pull-request-github",
+-        "SeeLog.python-init-generator",
+-        "tamasfe.even-better-toml",
+-    ]
+-}
+\ No newline at end of file
+diff --git a/.vscode/settings.json b/.vscode/settings.json
+index 435ba15..d9f475b 100644
+--- a/.vscode/settings.json
++++ b/.vscode/settings.json
+@@ -5,5 +5,6 @@
+     "python.testing.unittestEnabled": false,
+     "python.testing.pytestEnabled": true,
+     "python.analysis.typeCheckingMode": "strict",
+-    "python.analysis.diagnosticMode": "workspace"
++    "python.analysis.diagnosticMode": "workspace",
++    "python.defaultInterpreterPath": ".venv/bin/python"
+ }
+\ No newline at end of file
+diff --git a/.vscode/tasks.json b/.vscode/tasks.json
+index e37124e..9e69b50 100644
+--- a/.vscode/tasks.json
++++ b/.vscode/tasks.json
+@@ -6,7 +6,7 @@
+         {
+             "label": "PR",
+             "type": "shell",
+-            "command": "lm sync --squash",
++            "command": "make pr",
+             "group": {
+                 "kind": "build",
+                 "isDefault": true
+diff --git a/Dockerfile b/Dockerfile
+index 03c8851..64b3dc8 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -5,7 +5,7 @@ WORKDIR /app
+ 
+ ENV RYE_HOME="/opt/rye"
+ ENV PATH="$RYE_HOME/shims:$PATH"
+-RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" RYE_TOOLCHAIN_VERSION=3.9 bash
++RUN curl -sSf https://rye-up.com/get | RYE_INSTALL_OPTION="--yes" RYE_TOOLCHAIN="/usr/local/bin/python" bash
+ RUN rye config --set-bool behavior.use-uv=true
+ 
+ COPY Makefile ./
+@@ -13,4 +13,4 @@ COPY pyproject.toml ./
+ RUN make install
+ 
+ COPY . /app
+-RUN make install
+\ No newline at end of file
++RUN make sync
+\ No newline at end of file
+diff --git a/Makefile b/Makefile
+index 5444a1c..0e72880 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,6 +5,9 @@ MAKEFLAGS = --no-print-directory
+ install:
+ 	rye sync
+ 
++sync:
++	rye sync --no-lock
++
+ test:
+ 	@rye run pytest --cov=$(SRC_PATH) $(SRC_PATH) --cov-report xml:.coverage.xml --cov-report lcov:.coverage.lcov
+ 
+@@ -38,3 +41,6 @@ docker_ci: ## Run all checks in docker
+ 	@docker rm -f lumberman || true
+ 	@docker build -t lumberman:latest -f Dockerfile .
+ 	@docker run lumberman make validate_ci
++
++pr: ## Submit a PR
++	@rye run lm sync --squash --automerge
+diff --git a/lefthook.yml b/lefthook.yml
+index 3c6b3c2..c4f5cb8 100644
+--- a/lefthook.yml
++++ b/lefthook.yml
+@@ -11,3 +11,8 @@ pre-commit:
+       glob: "*.{py}"
+       run: ruff --fix --extend-select F401 --extend-select F841 --extend-select B007 {staged_files}
+       stage_fixed: true
++
++post-checkout:
++  commands:
++    install:
++      run: rye sync --no-lock
+-- 
+2.39.2
+
