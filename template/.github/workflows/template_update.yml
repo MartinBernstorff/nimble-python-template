@@ -1,0 +1,59 @@
+
+name: Template update
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  template-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      # Avoid infinite loop where main
+      # Feature PR -> template check from main ->
+      # Cruft update PR -> template check from main ->
+      # Cruft update PR ...
+      - name: Check if pull request is from a fork
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.fork }}" = "true" ]; then
+            echo "Pull request is from a fork and does not have permissions for PR creation. Exiting gracefully."
+            exit 0
+          elif [ "${{github.event.pull_request.title}}" == "ci - update template" ]; then
+            echo "Pull request is already a template update. Exiting gracefully."
+            exit 0
+          else
+            echo "Pull request is not from a fork, continuing."
+          fi
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Cruft
+        run: pip install copier
+
+      - name: Update template
+        id: template_check
+        run: |
+          new_template_commit=$(copier update -A)
+          latest_template_commit=$(grep '_commit' .copier-answers.yml | cut -d ' ' -f 2)
+          if echo "$new_template_commit" | grep -q "$latest_template_commit"; then
+            echo "template_update=false" >> $GITHUB_OUTPUT
+          else
+            echo "template_update=true" >> $GITHUB_OUTPUT
+          fi
+      - name: Create Pull Request
+        run: gh pr create --title "ci - update template" --body "🌲 Cruft updates"
+        env:
+            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
