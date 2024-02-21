@@ -6,7 +6,7 @@ install:
 	rye sync
 
 quicksync:
-	rye syc --no-lock
+	rye sync --no-lock
 
 test:
 	@rye run pytest --cov=$(SRC_PATH) $(SRC_PATH) --cov-report xml:.coverage.xml --cov-report lcov:.coverage.lcov

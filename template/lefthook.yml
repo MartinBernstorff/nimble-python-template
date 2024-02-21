@@ -15,4 +15,4 @@ pre-commit:
 post-checkout:
   commands:
     install:
-      run: rye sync --no-lock
+      run: make quicksync
