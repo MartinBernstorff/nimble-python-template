@@ -26,7 +26,7 @@ lint: ## Format code
 
 types: ## Type-check code
 	@echo "––– Type-checking –––"
-	@rye run pyright $(SRC_PATH)
+	@rye run pyright .
 	@echo "✅✅✅ Types ✅✅✅"
 
 validate_ci: ## Run all checks
