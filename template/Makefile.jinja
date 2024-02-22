@@ -13,6 +13,7 @@ test:
 
 test-with-coverage: 
 	@echo "––– Testing –––"
+	@make test
 	@rye run diff-cover .coverage.xml
 	@echo "✅✅✅ Tests passed ✅✅✅"
 
