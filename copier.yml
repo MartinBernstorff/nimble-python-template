@@ -34,9 +34,14 @@ package_name:
   help: "The name of the main Python package (should be a valid Python identifier)"
   default: "{{ project_slug.replace('-', '_') }}"
 
-release_to_pypi:
+release_package:
   type: bool
-  help: "Release to PyPI?"
+  help: "Release as package?"
+  default: "yes"
+
+release_docker_image:
+  type: bool
+  help: "Release Docker image?"
   default: "yes"
 
 # Copier metadata
