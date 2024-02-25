@@ -48,7 +48,7 @@ docker_ci: ## Run all checks in docker
 	@docker run {{ project_slug }} make validate_ci
 
 pr: ## Submit a PR
-	@rye run lm sync --squash --automerge
+	@lumberman sync --squash --automerge
 
 #########################
 # End template makefile #
