@@ -1,3 +1,7 @@
+###########################
+# Start template makefile #
+###########################
+
 SRC_PATH = {{ package_name }}
 MAKEFLAGS = --no-print-directory
 
@@ -45,3 +49,7 @@ docker_ci: ## Run all checks in docker
 
 pr: ## Submit a PR
 	@rye run lm sync --squash --automerge
+
+#########################
+# END TEMPLATE MAKEFILE #
+#########################
