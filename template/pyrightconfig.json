@@ -4,5 +4,6 @@
     ],
     "pythonPlatform": "Darwin",
     "reportMissingTypeStubs": false,
+    "reportUntypedFunctionDecorator": false,
     "typeCheckingMode": "strict"
 }
