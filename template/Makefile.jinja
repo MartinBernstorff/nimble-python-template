@@ -43,9 +43,8 @@ validate_ci: ## Run all checks
 
 docker_ci: ## Run all checks in docker
 	@echo "––– Running all checks in docker –––"
-	@docker rm -f {{ project_slug }}_ci || true
-	@docker build -t {{ project_slug }}_ci:latest -f .github/Dockerfile.dev .
-	@docker run {{ project_slug }}_ci make validate_ci
+	docker build -t {{ project_slug }}_ci -f .github/Dockerfile.dev .
+	docker run {{ project_slug }}_ci make validate_ci
 
 pr: ## Submit a PR
 	@lumberman sync --squash --automerge
