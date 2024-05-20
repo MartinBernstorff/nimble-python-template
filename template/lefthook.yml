@@ -11,4 +11,4 @@ pre-commit:
 post-checkout:
   commands:
     install:
-      run: make quicksync
+      run: if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then make quicksync; fi
