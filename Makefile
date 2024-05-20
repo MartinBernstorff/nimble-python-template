@@ -1,6 +1,7 @@
 OUTPUT_DIR = instance
 
 test-template:
+	pip install copier
 	rm -rf $(OUTPUT_DIR)
 	copier copy . $(OUTPUT_DIR) --defaults --overwrite
 	
