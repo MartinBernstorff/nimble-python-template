@@ -47,4 +47,4 @@ jobs:
           context: .
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: {% raw %}${{steps.meta.outputs.tags }}{% endraw %}
+          tags: {% raw %}${{ steps.meta.outputs.tags }}{% endraw %}
