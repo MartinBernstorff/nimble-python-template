@@ -8,7 +8,7 @@ Install copier
 pipx install copier
 ```
 
-Use template:
+### New project
 ```bash
 copier copy https://github.com/MartinBernstorff/nimble-python-template .
 ```
