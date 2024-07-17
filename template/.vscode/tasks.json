@@ -14,7 +14,7 @@
             },
             "presentation": {
                 "echo": true,
-                "reveal": "always",
+                "reveal": "silent",
                 "focus": false,
                 "panel": "dedicated",
                 "showReuseMessage": false,
@@ -29,7 +29,8 @@
             "presentation": {
                 "group": "buildTasks",
                 "panel": "dedicated",
-                "clear": true
+                "clear": true,
+                "reveal": "silent",
             }
         },
         {
@@ -43,7 +44,8 @@
             "presentation": {
                 "group": "buildTasks",
                 "panel": "dedicated",
-                "clear": true
+                "clear": true,
+                "reveal": "silent",
             }
         },
         {
@@ -54,7 +56,8 @@
             "presentation": {
                 "group": "buildTasks",
                 "panel": "dedicated",
-                "clear": true
+                "clear": true,
+                "reveal": "silent",
             }
         },
         {
@@ -65,7 +68,8 @@
             "presentation": {
                 "group": "buildTasks",
                 "panel": "dedicated",
-                "clear": true
+                "clear": true,
+                "reveal": "silent",
             }
         }
     ]
