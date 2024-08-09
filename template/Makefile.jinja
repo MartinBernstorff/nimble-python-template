@@ -31,7 +31,7 @@ lint: ## Format code
 # Useful for e.g. pre-commit hooks
 silent-lint:
 	@echo "––– Formatting –––"
-	@rye run ruff format --fix-only .
+	@rye run ruff format .
 	@rye run ruff . --fix-only --unsafe-fixes
 	@echo "✅✅✅ Format ✅✅✅"
 
