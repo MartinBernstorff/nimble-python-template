@@ -7,7 +7,7 @@ MAKEFLAGS = --no-print-directory
 
 # Dependency management
 install:
-	rye sync
+	rye sync --no-lock
 
 quicksync:
 	rye sync --no-lock
@@ -26,6 +26,14 @@ lint: ## Format code
 	@rye run ruff format .
 	@rye run ruff . --fix --unsafe-fixes
 	@echo "✅✅✅ Lint ✅✅✅"
+
+# Like lint, but does not fail if there are errors
+# Useful for e.g. pre-commit hooks
+silent-lint:
+	@echo "––– Formatting –––"
+	@rye run ruff format --fix-only .
+	@rye run ruff . --fix-only --unsafe-fixes
+	@echo "✅✅✅ Format ✅✅✅"
 
 types: ## Type-check code
 	@echo "––– Type-checking –––"

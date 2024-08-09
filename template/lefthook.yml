@@ -5,10 +5,5 @@ pre-commit:
   commands:
     lint:
       glob: "*.{py}"
-      run: make lint
+      run: make silent-lint
       stage_fixed: true
-
-post-checkout:
-  commands:
-    install:
-      run: make quicksync
