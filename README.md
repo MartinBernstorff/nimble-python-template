@@ -5,7 +5,13 @@ A python package template intended for low maintenance and rapid package develop
 
 Install copier
 ```
-pipx install copier
+brew install uv && uv tool install copier
+```
+
+_OR_
+
+```
+pip install copier
 ```
 
 ### New project
