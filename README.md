@@ -5,7 +5,7 @@ A python package template intended for low maintenance and rapid package develop
 
 Install copier
 ```
-pipx install copier
+uvx install copier
 ```
 
 ### New project
